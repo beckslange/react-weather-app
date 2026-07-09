@@ -10,6 +10,7 @@ export default function App() {
           <a
             href="https://www.linkedin.com/in/rebecca-lange-804b8b111/"
             target="_blank"
+            rel="noreferrer"
           >
             Rebecca Lange
           </a>{" "}
@@ -17,6 +18,7 @@ export default function App() {
           <a
             href="https://github.com/beckslange/react-weather-app"
             target="_blank"
+            rel="noreferrer"
           >
             Github
           </a>
