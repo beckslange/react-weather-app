@@ -1,9 +1,10 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="container">
         <h1>Weather App</h1>
         <footer>
           This project was coded by{" "}
@@ -23,7 +24,7 @@ export default function App() {
             Github
           </a>
         </footer>
-      </header>
+      </div>
     </div>
   );
 }
