@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Weather.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -47,9 +47,6 @@ export default function Weather(props) {
     let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
     axios.get(apiURL).then(refreshWeather);
   }
-  useEffect(() => {
-    searchCity(props.defaultCity);
-  }, [props.defaultCity]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -60,6 +57,7 @@ export default function Weather(props) {
     setCity(event.target.value);
   }
   if (weatherData === null) {
+    searchCity(props.defaultCity);
     return <p>Loading...</p>;
   }
 
