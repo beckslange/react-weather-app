@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Weather.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
@@ -23,7 +23,7 @@ export default function Weather(props) {
     let minutes = date.getMinutes();
 
     if (minutes < 10) {
-      minutes = `0$(minutes)`;
+      minutes = `0${minutes}`;
     }
     let ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
@@ -47,6 +47,9 @@ export default function Weather(props) {
     let apiURL = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
     axios.get(apiURL).then(refreshWeather);
   }
+  useEffect(() => {
+    searchCity(props.defaultCity);
+  }, [props.defaultCity]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -55,12 +58,11 @@ export default function Weather(props) {
 
   function updateCity(event) {
     setCity(event.target.value);
-    if (weatherData === null) {
-      searchCity(props.defaultCity);
-
-      return <p>Loading...</p>;
-    }
   }
+  if (weatherData === null) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="Weather">
       <form onSubmit={handleSubmit}>
@@ -76,34 +78,37 @@ export default function Weather(props) {
             />
           </div>
           <div className="col-3">
-            <input type="submit" value="Search" className="btn-primary w-100" />
+            <input
+              type="submit"
+              value="Search"
+              className="btn btn-primary w-100"
+            />
           </div>
         </div>
       </form>
       <h1 className="city-name">{weatherData.city}</h1>
       <ul className="list-unstyled">
-        <li>Wednesday 07:00</li>
-        <li>Mostly Cloudy</li>
+        <li>{weatherData.time}</li>
       </ul>
       <div className="row mt-3">
         <div className="col-6">
           <div className="d-flex align-items-center">
             <img
-              src="https://www.gstatic.com/weather/conditions/v1/svg/partly_cloudy_light.svg"
-              alt="Mostly Cloudy"
+              src={weatherData.iconURL}
+              alt={weatherData.description}
               className="weather-icon me-2"
             />
             <div className="temperature-container">
-              <span className="temperature">6</span>
-              <span className="unit ms-1">°C</span>
+              <span className="temperature">{weatherData.temperature}</span>
+              <span className="unit ms-1">°F</span>
             </div>
           </div>
         </div>
         <div className="col-6">
           <ul className="list-unstyled">
-            <li>Precipitation: 15%</li>
-            <li>Humidity: 72%</li>
-            <li>Wind: 13 km/h</li>
+            <li>{weatherData.description}</li>
+            <li>Humidity: {weatherData.humidity}</li>
+            <li>Wind: {weatherData.wind} mph</li>
           </ul>
         </div>
       </div>
