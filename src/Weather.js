@@ -21,7 +21,7 @@ export default function Weather() {
         </div>
       </form>
       <h1>New York</h1>
-      <ul>
+      <ul className="list-unstyled">
         <li>Wednesday 07:00</li>
         <li>Mostly Cloudy</li>
       </ul>
@@ -40,7 +40,7 @@ export default function Weather() {
           </div>
         </div>
         <div className="col-6">
-          <ul>
+          <ul className="list-unstyled">
             <li>Precipitation: 15%</li>
             <li>Humidity: 72%</li>
             <li>Wind: 13 km/h</li>

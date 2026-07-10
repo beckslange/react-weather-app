@@ -7,7 +7,7 @@ export default function App() {
     <div className="App">
       <div className="container">
         <Weather />
-        <footer>
+        <footer className="text-center">
           This project was coded by{" "}
           <a
             href="https://www.linkedin.com/in/rebecca-lange-804b8b111/"
